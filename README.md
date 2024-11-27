@@ -7,15 +7,16 @@ password : test12
 1. Laravel : 11
 2. Vue : 3.xx
 
-# Login 
+# CRUD Operation
+## Login 
 ![Alt Text](https://github.com/RIY15/CRUD_LibraryWeb_Using_laravel_and_VueJs/blob/main/Documentation/image/login.png)
 # Buku View (Data Grid) 
 ![Alt Text](https://github.com/RIY15/CRUD_LibraryWeb_Using_laravel_and_VueJs/blob/main/Documentation/image/BukuView.png)
-# Add Book 
+## Add Book 
 ![Alt Text](https://github.com/RIY15/CRUD_LibraryWeb_Using_laravel_and_VueJs/blob/main/Documentation/image/AddBook.png)
-# Upadte Book 
+## Upadte Book 
 ![Alt Text](https://github.com/RIY15/CRUD_LibraryWeb_Using_laravel_and_VueJs/blob/main/Documentation/image/UpdateBook.png)
-# Delete Book
+## Delete Book
 ![Alt Text](https://github.com/RIY15/CRUD_LibraryWeb_Using_laravel_and_VueJs/blob/main/Documentation/image/DeleteBook.png)
 
 # Demo App 
