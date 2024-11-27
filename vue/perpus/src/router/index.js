@@ -40,13 +40,13 @@ const router = createRouter({
       meta: { requiresAuth: true }, 
     },
     {
-      path: '/bukuview/:theisbn',
-      name: 'bukuview',
+      path: '/formbuku',
+      name: 'formbuku',
       component: FormBukuView,
       meta: { requiresAuth: true }, 
     },
     {
-      path: '/bukuview',
+      path: '/bukuview/:theisbn',
       name: 'bukuview',
       component: FormBukuView,
       meta: { requiresAuth: true }, 

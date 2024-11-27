@@ -5,6 +5,8 @@
     import { useUserStore } from '../stores/counter'
     import MenuView from './MenuView.vue';
     import { storeToRefs } from 'pinia'
+    import alertify from 'alertifyjs';
+    import 'alertifyjs/build/css/alertify.css'; // Ensure styles are loaded
 
 
     const books = ref([])  // Holds the list of books
@@ -44,40 +46,54 @@
 
     // Function to handle deletion confirmation
     function delete_dialog(id) {
-    alertify.confirm(
-        'Confirmation',
-        'Are you sure you want to delete this data?', 
-        () => { 
-        hapus(id)  // If confirmed, call hapus function
-        },
-        () => {
-        // You can add a "cancel" callback here if needed
-        console.log('Deletion cancelled')
-        }
-    )
-    console.log('Delete ID: ' + id)
+        alertify.confirm(
+            'Confirmation',
+            'Are you sure you want to delete this data?', 
+            () => { 
+                hapus(id)  // If confirmed, call hapus function
+            },
+            () => {
+                console.log('Deletion cancelled') // Optionally handle the cancellation action
+            }
+        ).set({
+            labels: { ok: 'Yes, Delete', cancel: 'No, Keep' },  // Customize button labels
+            padding: true,  // Enable padding for better appearance
+            closableByDimmer: false,  // Prevent closing by clicking outside the dialog
+            transition: 'fade',  // Set transition effect (fade or slide)
+            theme: 'bootstrap'  // Optional: use Bootstrap styling for alertify (can be customized)
+        });
+        console.log('Delete ID: ' + id);
     }
 
     // Function to delete the book data
     function hapus(id) {
-    axios({
-        url: `http://localhost/web_Programming/laravel/perpus/public/api/book/delete/${id}`,
-        method: 'get',
-        headers: customConfig
-    }).then(response => {
-        if(response.data.success === true) {
-        alertify.alert('Information', 'Data has been deleted!', () => {
-            alertify.success('OK')
-            refreshdata()  // Refresh the book list after deletion
+        axios({
+            url: `http://localhost/web_Programming/laravel/perpus/public/api/book/delete/${id}`,
+            method: 'get',
+            headers: customConfig
+        }).then(response => {
+            if (response.data.success === true) {
+                alertify.alert('Information', 'Data has been deleted!', () => {
+                    alertify.success('OK');
+                    refreshdata();  // Refresh the book list after deletion
+                }).set({
+                    transition: 'fade',  // Optional: Add fade effect for alert
+                    theme: 'bootstrap'  // Optional: Add Bootstrap theme to alertify dialog
+                });
+            } else {
+                alertify.alert('Error', 'Failed to delete the book. Please try again.').set({
+                    transition: 'fade', 
+                    theme: 'bootstrap'
+                });
+            }
         })
-        }
-    })
-    .catch(error => {
-        console.log('AJAX Error: ' + error)
-    })
-    .finally(() => {
-        // Optional: Handle post-deletion cleanup
-    })
+        .catch(error => {
+            console.log('AJAX Error: ' + error);
+            alertify.alert('Error', 'An error occurred while trying to delete the book.').set({
+                transition: 'fade', 
+                theme: 'bootstrap'
+            });
+        });
     }
 </script>
 
@@ -91,7 +107,7 @@
   
       <!-- Tombol Add Book -->
       <div class="d-flex justify-content-end mb-3">
-        <router-link to="/bukuview">
+        <router-link to="/formbuku">
           <button type="button" class="btn btn-primary">
             <font-awesome-icon :icon="['fas', 'folder-plus']" /> Add Book
           </button>
