@@ -3,9 +3,12 @@ email : test12@yahoo.com
 
 password : test12
 
-# Version :
+# Tools :
 1. Laravel : 11
 2. Vue : 3.xx
+3. Xampp
+4. Composer
+5. Postman
 
 # CRUD Operation
 ## Login 
