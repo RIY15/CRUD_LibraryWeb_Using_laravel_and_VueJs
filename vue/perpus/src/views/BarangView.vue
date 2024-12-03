@@ -1,4 +1,5 @@
 <script setup>
+import Sidebar from '@/components/Sidebar.vue';
 import { useUserStore } from '../stores/counter'
 import MenuView from './MenuView.vue';
 
@@ -10,6 +11,6 @@ function increase(){
 </script>
 
 <template>
-    <MenuView/>
+    <Sidebar/>
 </template>
 

@@ -4,6 +4,7 @@ import FooterView from './views/FooterView.vue'
 import MenuView from './views/MenuView.vue'
 
 import { useRoute } from 'vue-router'
+import Sidebar from './components/Sidebar.vue';
 
 const theroute = useRoute()
 const isnotlogin = computed(() =>{
@@ -14,7 +15,7 @@ const isnotlogin = computed(() =>{
 
 <template>
     <div class="container">  
-        <MenuView v-if="isnotlogin"/>
+        <Sidebar v-if="isnotlogin"/>
         <div class="row">
              <router-view></router-view>
         </div>

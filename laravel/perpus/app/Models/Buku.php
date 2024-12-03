@@ -10,6 +10,7 @@ class Buku extends Model
     /** @use HasFactory<\Database\Factories\BukuFactory> */
     use HasFactory;
 
-    protected $table = 'bukus'; // Nama tabel di database
+    protected $table = 'buku'; // Nama tabel di database
     protected $primaryKey = 'isbn'; // Ganti dengan nama kolom primary key sebenarnya
+    protected $keyType = 'string';
 }

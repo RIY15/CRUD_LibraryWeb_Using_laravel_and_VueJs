@@ -24,6 +24,7 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::get('/book/show/{id}', 'show');
         Route::post('/book/update', 'update');
         Route::get('/book/delete/{id}', 'destroy');
+        Route::post('/book/cari', 'search');
     });
 });
 

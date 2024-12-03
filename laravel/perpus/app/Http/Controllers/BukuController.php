@@ -102,4 +102,36 @@ class BukuController extends Controller
          return $this->index();
 
     }
+
+    public function search(Request $request)
+    {
+        // Ambil parameter pencarian, start, dan limit
+        $cari = $request->cari;
+        $start = $request->start;
+        $limit = $request->limit;
+
+        // Jika pencarian kosong, tampilkan semua data
+        $query = DB::table('buku');
+        if (trim($cari) !== '') {
+            $query->where('judul', 'like', "%".$cari."%")
+                ->orWhere('pengarang', 'like', "%".$cari."%");
+        }
+
+        // Hitung total data
+        $count = $query->count();
+
+        // Ambil data sesuai paginasi
+        $buku = $query->orderBy('judul')
+                    ->offset($start)
+                    ->limit($limit)
+                    ->get();
+
+        // Buat response
+        $obj = new \stdClass();
+        $obj->count = $count;
+        $obj->buku = $buku;
+        return MyUtil::sendResponse($obj, 'OK');
+    }
+
+
 }
