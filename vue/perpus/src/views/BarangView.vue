@@ -11,6 +11,6 @@ function increase(){
 </script>
 
 <template>
-    <Sidebar/>
+    <h1>Barang</h1>
 </template>
 

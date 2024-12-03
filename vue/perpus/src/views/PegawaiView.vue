@@ -11,6 +11,6 @@ function increase(){
 </script>
 
 <template>
-  <Sidebar/>
+  <h2>Pegawai</h2>
 </template>
 
