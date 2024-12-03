@@ -18,9 +18,8 @@ function logout(){
           method: 'get',
           headers: customConfig
         }).then(response => {
-          console.log(response.data)//only for development
-          if(response.data.success === true)
-          {
+          console.log(response.data) // only for development
+          if (response.data.success === true) {
             store.reset()
             therouter.push('/')
           }
@@ -28,7 +27,6 @@ function logout(){
       .catch(error => {
         console.log('AJAX' + error)
       })
-      .finally()
 }
 
 // State untuk dropdown
@@ -39,15 +37,33 @@ function toggleDropdown() {
   isDropdownOpen.value = !isDropdownOpen.value;
 }
 
+// State untuk sidebar
+const isSidebarOpen = ref(false);
+
+// Toggle sidebar
+function toggleSidebar() {
+  isSidebarOpen.value = !isSidebarOpen.value;
+}
 </script>
 
 <template>
-  <div class="relative">
+  <div>
+    <!-- Hamburger Button -->
+    <button
+      @click="toggleSidebar"
+      class="p-3 bg-gray-900 text-white fixed top-2 left-2 z-50 rounded-md focus:outline-none focus:ring focus:ring-gray-600"
+    >
+      <font-awesome-icon :icon="isSidebarOpen ? 'times' : 'bars'" class="w-6 h-6" />
+    </button>
+
     <!-- Sidebar Container -->
-    <div class="bg-gray-900 text-white h-screen w-64 p-4 flex flex-col justify-between absolute left-0 top-0">
+    <div
+      :class="{ '-translate-x-full': !isSidebarOpen }"
+      class="bg-gray-900 text-white h-screen w-64 p-4 flex flex-col justify-between absolute left-0 top-0 transform transition-transform duration-300"
+    >
       <!-- User Info -->
       <div>
-        <div class="flex items-center space-x-3 mb-6">
+        <div class="flex items-center space-x-3 mb-6 mt-10">
           <!-- Profile Icon -->
           <font-awesome-icon icon="user" class="text-gray-300 w-6 h-6" />
           <span class="font-semibold">{{ email || 'User Email' }}</span>
@@ -132,5 +148,13 @@ function toggleDropdown() {
 /* Rotate dropdown icon */
 .rotate-180 {
   transform: rotate(180deg);
+}
+/* Sidebar transition */
+.transform {
+  transition: transform 0.3s ease-in-out;
+}
+/* Sidebar hidden state */
+.-translate-x-full {
+  transform: translateX(-100%);
 }
 </style>
